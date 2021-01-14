@@ -40,7 +40,31 @@ class ReverseLinkedList{
         }
         return previous;
     }
+    // 1==>  2 ==> 3 ==> 4
+    public static Node recursiveReverse(Node head){
+        if(head == null|| head.next == null){
+            return head;
+        }
+        Node restHead = recursiveReverse(head.next);
+        Node restTail = head.next;
+        restTail.next = head;
+        head.next = null;
+        return restHead;
 
+
+    }
+    // 1==> 2 ==> 3 ==> 4
+    public static Node recursiveReverseV2(Node current,Node previous){
+
+        // Node prev = previous;
+        // Node current = head;
+        if(current == null){
+            return previous;
+        }
+        Node next = current.next;
+        current.next = previous;
+        return recursiveReverseV2(next,current);
+    }
 
     public static void print(Node head){
         
@@ -57,7 +81,7 @@ class ReverseLinkedList{
         head.next.next = new Node(30);
         head.next.next.next = new Node(40);
         head.next.next.next.next = new Node(50);
-        head = efficientReverse(head);
+        head = recursiveReverseV2(head,null);
         print(head);
     }
 }

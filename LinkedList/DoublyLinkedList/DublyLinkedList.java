@@ -44,6 +44,47 @@ class DublyLinkedList{
         newNode.prev = current;
         return head;
     }
+    // null 1 2 3 4 5 6
+    public static Node reverse(Node head){
+        if(head.next == null || head == null){
+            return head;
+        }
+        Node current = head;
+        Node temp = null;
+        while(current != null){
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev; 
+        }
+        temp = temp.prev;
+        return temp;
+    }
+    //1 2 3 4 5
+    public static Node deleteHead(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node current = head;
+        current = current.next;
+        current.prev = null;
+        return current;
+    }
+    public static Node deleteLastNode(Node head){
+        if(head == null ){
+            return null;
+        }
+        if(head.next == null){
+            return null;
+        }
+
+        Node current = head;
+        while(current.next != null){
+            current = current.next;
+        }
+        current.prev.next = null;
+        return head;
+    }
     
     public static void main(String args[]){
         Node head = new Node(10);
@@ -56,6 +97,12 @@ class DublyLinkedList{
         head = insertBegin(head,5);
         head = insertAtEnd(head,40);
         printlist(head);
+        head = deleteHead(head);
+        printlist(head);
+        head = deleteLastNode(head);
+        printlist(head);
+        // head = reverse(head);
+        // printlist(head);
         
     }
 }
